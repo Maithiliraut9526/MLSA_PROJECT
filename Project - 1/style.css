@@ -1,0 +1,103 @@
+:root {
+    --bg: #05070a;
+    --side: #0a0d14;
+    --accent: #00f2ff;
+    --purple: #7000ff;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --glass: rgba(255, 255, 255, 0.03);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.dashboard { display: flex; height: 100vh; }
+
+/* Sidebar & Configuration */
+.sidebar {
+    width: 300px;
+    background: var(--side);
+    border-right: 1px solid rgba(0, 242, 255, 0.1);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo { display: flex; align-items: center; gap: 15px; margin-bottom: 3rem; }
+.logo-icon { 
+    background: linear-gradient(135deg, var(--purple), var(--accent));
+    padding: 10px; border-radius: 12px; font-size: 1.2rem;
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+}
+
+.section-label { color: var(--muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem; }
+
+.input-group { margin-bottom: 2rem; }
+.input-group label { display: block; margin-bottom: 10px; font-size: 0.9rem; }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+
+.neon-input {
+    background: #000; border: 1px solid #1e293b; color: var(--accent);
+    padding: 10px; border-radius: 8px; width: 100%; outline: none;
+}
+
+.switch {
+    display: flex; justify-content: space-between; padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem;
+}
+
+.glow-btn {
+    margin-top: auto; padding: 15px; border-radius: 12px; border: none;
+    background: linear-gradient(135deg, var(--purple), var(--accent));
+    color: white; font-weight: 800; cursor: pointer;
+    box-shadow: 0 0 20px rgba(112, 0, 255, 0.4); transition: 0.3s;
+}
+.glow-btn:hover { transform: translateY(-3px); box-shadow: 0 0 30px var(--accent); }
+
+/* Main Content Area */
+.content { flex: 1; padding: 3rem; overflow-y: auto; background: radial-gradient(circle at top right, #111827, #05070a); }
+.status-pill { background: rgba(34, 197, 94, 0.1); color: #22c55e; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; }
+.dot { height: 6px; width: 6px; background: #22c55e; border-radius: 50%; display: inline-block; margin-right: 5px; }
+
+.glass-card {
+    background: var(--glass); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px;
+    padding: 1.5rem; transition: 0.3s;
+}
+
+.main-card { border: 1px solid rgba(0, 242, 255, 0.2); margin-bottom: 1.5rem; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.small-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+
+.password-container {
+    display: flex; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px;
+}
+#pass-display {
+    background: transparent; border: none; color: var(--text);
+    font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; width: 100%;
+}
+.icon-btn { background: transparent; border: none; color: var(--accent); font-size: 1.2rem; cursor: pointer; }
+
+.strength-track { height: 4px; background: #000; border-radius: 10px; margin-top: 20px; overflow: hidden; }
+#st-fill { height: 100%; width: 0%; transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+
+.action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+.action-item { display: flex; align-items: center; gap: 15px; cursor: pointer; }
+.action-item i { font-size: 1.5rem; color: var(--accent); }
+.action-item:hover { border-color: var(--accent); background: rgba(0, 242, 255, 0.05); }
+
+/* History List */
+#history-list { list-style: none; margin-top: 1rem; }
+#history-list li {
+    background: rgba(255,255,255,0.02); padding: 12px 18px; margin-bottom: 8px;
+    border-radius: 10px; display: flex; justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace; border-left: 3px solid var(--purple);
+}
+.li-actions button { background: transparent; border: none; color: var(--muted); margin-left: 10px; cursor: pointer; }
+.li-actions button:hover { color: var(--accent); }

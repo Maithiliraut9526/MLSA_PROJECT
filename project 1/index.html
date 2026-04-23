@@ -3,61 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypton | Advanced Password Generator</title>
+    <title>GuardX | Ultra-Glow Security</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Plus+Jakarta+Sans:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-shield-alt"></i> CRYPTON</h1>
-            <p>Professional Security Suite</p>
-        </header>
 
-        <div class="result-container">
-            <input type="text" id="password-display" readonly placeholder="P4ssw0rd!">
-            <button id="copy-btn" title="Copy to Clipboard"><i class="far fa-copy"></i></button>
-        </div>
-
-        <div class="strength-meter">
-            <div id="strength-bar"></div>
-            <small id="strength-text">Strength: Idle</small>
-        </div>
-
-        <div class="settings">
-            <div class="setting-item">
-                <label>Length: <span id="length-val">16</span></label>
-                <input type="range" id="length-slider" min="8" max="50" value="16">
+    <div class="glow-container">
+        <aside class="glass-side">
+            <div class="brand-box">
+                <i class="fas fa-atom-simple logo-glow"></i>
+                <h1>GUARD<span>X</span></h1>
             </div>
 
-            <div class="options-grid">
-                <label class="checkbox-container">Uppercase
-                    <input type="checkbox" id="uppercase" checked>
-                    <span class="checkmark"></span>
-                </label>
-                <label class="checkbox-container">Lowercase
-                    <input type="checkbox" id="lowercase" checked>
-                    <span class="checkmark"></span>
-                </label>
-                <label class="checkbox-container">Numbers
-                    <input type="checkbox" id="numbers" checked>
-                    <span class="checkmark"></span>
-                </label>
-                <label class="checkbox-container">Symbols
-                    <input type="checkbox" id="symbols" checked>
-                    <span class="checkmark"></span>
-                </label>
-            </div>
-        </div>
+            <div class="config-wrap">
+                <div class="input-glow-group">
+                    <label>Entropy Length: <b id="len-val">24</b></label>
+                    <input type="range" id="length-slider" min="8" max="64" value="24">
+                </div>
 
-        <div class="actions">
-            <button id="generate-btn" class="primary-btn">Generate Password</button>
-            <div class="secondary-actions">
-                <button id="save-btn"><i class="fas fa-file-download"></i> Save to .txt</button>
-                <button id="multi-gen-btn"><i class="fas fa-layer-group"></i> Bulk (10)</button>
+                <div class="input-glow-group">
+                    <label>Batch Generation</label>
+                    <input type="number" id="qty-input" value="5" min="1" max="20" class="neon-num">
+                </div>
+
+                <div class="neon-grid">
+                    <label class="neon-toggle"><input type="checkbox" id="upper" checked><span>A-Z</span></label>
+                    <label class="neon-toggle"><input type="checkbox" id="lower" checked><span>a-z</span></label>
+                    <label class="neon-toggle"><input type="checkbox" id="nums" checked><span>0-9</span></label>
+                    <label class="neon-toggle"><input type="checkbox" id="syms" checked><span>!@#</span></label>
+                </div>
+
+                <button id="generate-btn" class="main-glow-btn">INITIALIZE CORE</button>
             </div>
-        </div>
+        </aside>
+
+        <main class="glass-main">
+            <header class="main-header">
+                <span class="pulse-status">SYSTEM ENCRYPTED</span>
+                <button id="export-btn" class="ghost-btn"><i class="fas fa-file-export"></i> EXPORT</button>
+            </header>
+
+            <div class="output-shield">
+                <div class="shield-label">Primary Output</div>
+                <div class="main-pass-box">
+                    <input type="text" id="pass-display" readonly value="READY TO GENERATE">
+                    <button id="copy-btn"><i class="far fa-copy"></i></button>
+                </div>
+                <div class="glow-bar-container">
+                    <div id="st-fill"></div>
+                </div>
+                <p id="st-text">Awaiting Input...</p>
+            </div>
+
+            <div class="vault-section">
+                <h3 class="vault-title"><i class="fas fa-microchip"></i> GENERATION HISTORY</h3>
+                <div id="history-list" class="vault-scroll">
+                    </div>
+            </div>
+        </main>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

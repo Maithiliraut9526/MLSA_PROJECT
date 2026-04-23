@@ -1,64 +1,79 @@
-const display = document.getElementById('password-display');
+const display = document.getElementById('pass-display');
 const lengthSlider = document.getElementById('length-slider');
-const lengthVal = document.getElementById('length-val');
-const strengthBar = document.getElementById('strength-bar');
-const strengthText = document.getElementById('strength-text');
+const lenVal = document.getElementById('len-val');
+const historyList = document.getElementById('history-list');
+const qtyInput = document.getElementById('qty-input');
 
-const charSets = {
-    uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-    lowercase: 'abcdefghijklmnopqrstuvwxyz',
-    numbers: '0123456789',
-    symbols: '!@#$%^&*()_+~`|}{[]:;?><,./-='
-};
+lengthSlider.addEventListener('input', (e) => lenVal.innerText = e.target.value);
 
-lengthSlider.addEventListener('input', (e) => {
-    lengthVal.innerText = e.target.value;
-});
-
-function generatePassword() {
+function generateSecureKey() {
+    const sets = {
+        upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+        lower: 'abcdefghijklmnopqrstuvwxyz',
+        nums: '0123456789',
+        syms: '!@#$%^&*()_+~`|}{[]:;?><,./-='
+    };
     let charset = '';
-    if (document.getElementById('uppercase').checked) charset += charSets.uppercase;
-    if (document.getElementById('lowercase').checked) charset += charSets.lowercase;
-    if (document.getElementById('numbers').checked) charset += charSets.numbers;
-    if (document.getElementById('symbols').checked) charset += charSets.symbols;
+    if (document.getElementById('upper').checked) charset += sets.upper;
+    if (document.getElementById('lower').checked) charset += sets.lower;
+    if (document.getElementById('nums').checked) charset += sets.nums;
+    if (document.getElementById('syms').checked) charset += sets.syms;
+    if (!charset) return 'ERROR';
 
-    if (!charset) return 'Select Options!';
+    const len = parseInt(lengthSlider.value);
+    const array = new Uint32Array(len);
+    window.crypto.getRandomValues(array);
+    let pwd = '';
+    for (let i = 0; i < len; i++) pwd += charset.charAt(array[i] % charset.length);
+    return pwd;
+}
 
-    let password = '';
-    for (let i = 0; i < lengthSlider.value; i++) {
-        password += charset.charAt(Math.floor(Math.random() * charset.length));
+document.getElementById('generate-btn').addEventListener('click', () => {
+    const qty = parseInt(qtyInput.value) || 1;
+    // Glow Animation
+    gsap.fromTo(".output-shield", {boxShadow: "0 0 0px var(--cyan)"}, {boxShadow: "0 0 30px rgba(0, 242, 255, 0.2)", duration: 0.5});
+
+    for (let i = 0; i < qty; i++) {
+        setTimeout(() => {
+            const res = generateSecureKey();
+            if (i === 0) {
+                display.value = res;
+                updateStrength(res);
+            }
+            addLog(res);
+        }, i * 50);
     }
-    
-    display.value = password;
-    checkStrength(password);
-}
-
-function checkStrength(pwd) {
-    let strength = 0;
-    if (pwd.length > 12) strength++;
-    if (/[A-Z]/.test(pwd)) strength++;
-    if (/[0-9]/.test(pwd)) strength++;
-    if (/[^A-Za-z0-9]/.test(pwd)) strength++;
-
-    const colors = ['#ef4444', '#f59e0b', '#38bdf8', '#22c55e'];
-    const texts = ['Weak', 'Fair', 'Good', 'Strong'];
-    
-    strengthBar.style.width = (strength + 1) * 20 + '%';
-    strengthBar.style.backgroundColor = colors[strength];
-    strengthText.innerText = `Strength: ${texts[strength]}`;
-}
-
-document.getElementById('generate-btn').addEventListener('click', generatePassword);
-
-document.getElementById('save-btn').addEventListener('click', () => {
-    const blob = new Blob([display.value], { type: 'text/plain' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'password.txt';
-    a.click();
 });
+
+function addLog(pwd) {
+    const div = document.createElement('div');
+    div.className = 'log-chip';
+    div.innerHTML = `<span>${pwd}</span> <i class="fas fa-copy" style="cursor:pointer" onclick="navigator.clipboard.writeText('${pwd}')"></i>`;
+    historyList.prepend(div);
+    gsap.from(div, {opacity: 0, y: 10, duration: 0.4});
+}
+
+function updateStrength(pwd) {
+    const fill = document.getElementById('st-fill');
+    const text = document.getElementById('st-text');
+    let strength = 0;
+    if (pwd.length > 20) strength++;
+    if (/[!@#$%^&*]/.test(pwd)) strength++;
+    
+    const levels = [
+        {w: '33%', c: '#ff4b2b', t: 'VULNERABLE'},
+        {w: '66%', c: '#ffb400', t: 'SECURE'},
+        {w: '100%', c: '#00f2ff', t: 'MILITARY-GRADE'}
+    ];
+    const lvl = levels[strength] || levels[0];
+    fill.style.width = lvl.w;
+    fill.style.backgroundColor = lvl.c;
+    fill.style.boxShadow = `0 0 15px ${lvl.c}`;
+    text.innerText = lvl.t;
+    text.style.color = lvl.c;
+}
 
 document.getElementById('copy-btn').addEventListener('click', () => {
     navigator.clipboard.writeText(display.value);
-    alert('Copied to clipboard!');
+    gsap.fromTo("#copy-btn", {scale: 1.5}, {scale: 1, duration: 0.2});
 });

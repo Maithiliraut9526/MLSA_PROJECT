@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuardX | Ultra-Secure Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-shield-halved"></i></div>
+                <h2>GuardX</h2>
+            </div>
+            
+            <div class="config-panel">
+                <p class="section-label">Parameters</p>
+                
+                <div class="input-group">
+                    <label>Length: <span id="len-output">20</span></label>
+                    <input type="range" id="length-slider" min="8" max="64" value="20">
+                </div>
+
+                <div class="input-group">
+                    <label>Quantity:</label>
+                    <input type="number" id="qty-input" min="1" max="50" value="5" class="neon-input">
+                </div>
+
+                <div class="toggle-list">
+                    <label class="switch">
+                        <span>Uppercase</span>
+                        <input type="checkbox" id="upper" checked>
+                    </label>
+                    <label class="switch">
+                        <span>Lowercase</span>
+                        <input type="checkbox" id="lower" checked>
+                    </label>
+                    <label class="switch">
+                        <span>Numbers</span>
+                        <input type="checkbox" id="nums" checked>
+                    </label>
+                    <label class="switch">
+                        <span>Symbols</span>
+                        <input type="checkbox" id="syms" checked>
+                    </label>
+                </div>
+
+                <button id="generate-btn" class="glow-btn">Generate Key</button>
+            </div>
+        </aside>
+
+        <main class="content">
+            <header class="top-bar">
+                <div class="header-info">
+                    <h1>Security Console</h1>
+                    <span class="status-pill"><span class="dot"></span> System Ready</span>
+                </div>
+            </header>
+
+            <div class="main-display">
+                <div class="card glass-card main-card">
+                    <div class="card-header">
+                        <span class="small-label">Active Secure Key</span>
+                        <span id="st-label">Strength: Waiting</span>
+                    </div>
+                    <div class="password-container">
+                        <input type="text" id="pass-display" readonly placeholder="Generate...">
+                        <button id="copy-btn" class="icon-btn"><i class="far fa-copy"></i></button>
+                    </div>
+                    <div class="strength-track">
+                        <div id="st-fill"></div>
+                    </div>
+                </div>
+
+                <div class="action-grid">
+                    <div class="glass-card action-item" id="bulk-btn">
+                        <i class="fas fa-layer-group"></i>
+                        <div>
+                            <h4>Bulk Generate</h4>
+                            <p>Batch create <span class="qty-sync">5</span> keys</p>
+                        </div>
+                    </div>
+                    <div class="glass-card action-item" id="export-btn">
+                        <i class="fas fa-file-export"></i>
+                        <div>
+                            <h4>Export Data</h4>
+                            <p>Download as TXT</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card glass-card history-card">
+                    <h3><i class="fas fa-clock-rotate-left"></i> Security Logs</h3>
+                    <ul id="history-list">
+                        <li class="empty-msg">No entries in current session.</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

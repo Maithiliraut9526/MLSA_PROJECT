@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypton | Advanced Password Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-shield-alt"></i> CRYPTON</h1>
+            <p>Professional Security Suite</p>
+        </header>
+
+        <div class="result-container">
+            <input type="text" id="password-display" readonly placeholder="P4ssw0rd!">
+            <button id="copy-btn" title="Copy to Clipboard"><i class="far fa-copy"></i></button>
+        </div>
+
+        <div class="strength-meter">
+            <div id="strength-bar"></div>
+            <small id="strength-text">Strength: Idle</small>
+        </div>
+
+        <div class="settings">
+            <div class="setting-item">
+                <label>Length: <span id="length-val">16</span></label>
+                <input type="range" id="length-slider" min="8" max="50" value="16">
+            </div>
+
+            <div class="options-grid">
+                <label class="checkbox-container">Uppercase
+                    <input type="checkbox" id="uppercase" checked>
+                    <span class="checkmark"></span>
+                </label>
+                <label class="checkbox-container">Lowercase
+                    <input type="checkbox" id="lowercase" checked>
+                    <span class="checkmark"></span>
+                </label>
+                <label class="checkbox-container">Numbers
+                    <input type="checkbox" id="numbers" checked>
+                    <span class="checkmark"></span>
+                </label>
+                <label class="checkbox-container">Symbols
+                    <input type="checkbox" id="symbols" checked>
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button id="generate-btn" class="primary-btn">Generate Password</button>
+            <div class="secondary-actions">
+                <button id="save-btn"><i class="fas fa-file-download"></i> Save to .txt</button>
+                <button id="multi-gen-btn"><i class="fas fa-layer-group"></i> Bulk (10)</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

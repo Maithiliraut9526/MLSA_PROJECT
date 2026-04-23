@@ -1,0 +1,703 @@
+/* Expense Tracker Plus stylesheet */
+/* Light theme with clean, modern design for expense tracking */
+
+/* Add smooth animations and transitions */
+* {
+  transition: all 0.3s ease;
+}
+
+/* Pulse animation for important elements */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Slide in animation */
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Bounce animation */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+:root {
+  /* Define color variables for consistent theming */
+  --bg: #f8f9fa;
+  --panel: #ffffff;
+  --text: #212529;
+  --muted: #6c757d;
+  --accent: #007bff;
+  --accent-soft: rgba(0, 123, 255, 0.1);
+  --success: #28a745;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --border: #dee2e6;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --dark-bg: #1a1a1a;
+  --dark-panel: #2d2d2d;
+  --dark-text: #ffffff;
+  --dark-muted: #b0b0b0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Ensure consistent box-sizing across all elements */
+* {
+  box-sizing: border-box;
+}
+
+/* Set full height background with light gradient */
+html,
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+  color: var(--text);
+  animation: fadeIn 0.5s ease-in;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Center the app and add padding */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 10px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+}
+
+/* Inherit font for form elements */
+button,
+select,
+input {
+  font: inherit;
+}
+
+/* Main app container with max width - optimized for screenshots */
+.app-shell {
+  width: min(1000px, calc(100vw - 20px));
+  max-width: 1000px;
+  animation: slideIn 0.6s ease-out;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Header styling with title and stats */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+/* App name styling */
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Main title */
+.topbar h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  line-height: 1.2;
+  max-width: 60ch;
+}
+
+/* Stats panel layout */
+.stats-panel {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Individual stat blocks */
+.stat-block {
+  min-width: 140px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+}
+
+.stat-block span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.stat-block strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.5rem;
+  color: var(--accent);
+}
+
+/* Main content grid layout - optimized for screenshots */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Card styling for main sections */
+.expense-card,
+.summary-card {
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+/* Form section styling */
+.add-expense h2,
+.expense-list h2 {
+  margin: 0 0 16px;
+  color: var(--text);
+}
+
+/* Form group layout */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Input and select styling */
+input,
+select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+/* Focus states for inputs */
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* Button base styles */
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+/* Primary button (blue) */
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), #0056b3);
+  color: white;
+}
+
+/* Secondary button (gray) */
+.btn-secondary {
+  background: #f8f9fa;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* Active state for filter buttons */
+.btn-secondary.active {
+  background: var(--accent);
+  color: white;
+}
+
+/* Tertiary button (outlined) */
+.btn-tertiary {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+/* Scrollable list container */
+.list-container {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  background: #f8f9fa;
+}
+
+/* Individual expense item styling */
+.expense-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 8px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.expense-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Expense details layout */
+.expense-details {
+  flex: 1;
+}
+
+/* Amount styling (red for expenses) */
+.expense-amount {
+  font-weight: 600;
+  color: var(--danger);
+}
+
+/* Category and date styling */
+.expense-category {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.expense-date {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* Delete button styling */
+.delete-btn {
+  background: var(--danger);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+}
+
+/* Summary header with filters */
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.summary-header h2 {
+  margin: 0;
+}
+
+/* Filter button group */
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* Category summary section */
+.category-summary {
+  margin-bottom: 24px;
+}
+
+/* Individual category item */
+.category-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 8px;
+  background: var(--accent-soft);
+  border-radius: 8px;
+}
+
+.category-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Category name and amount styling */
+.category-name {
+  font-weight: 600;
+}
+
+.category-amount {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* Chart section styling */
+.chart-section {
+  margin-bottom: 24px;
+}
+
+.chart-section h3 {
+  margin: 0 0 12px;
+  color: var(--text);
+}
+
+/* Text-based chart container */
+.text-chart {
+  background: #f8f9fa;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+/* Budget Section Styles */
+.budget-section {
+  margin-bottom: 24px;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--accent-soft), rgba(40, 167, 69, 0.1));
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  animation: fadeIn 0.8s ease-out;
+}
+
+.budget-section h2 {
+  margin: 0 0 16px;
+  color: var(--text);
+  font-size: 1.2rem;
+}
+
+.budget-progress {
+  margin-top: 16px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background: #e9ecef;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--success), var(--warning), var(--danger));
+  border-radius: 6px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+
+#budget-status {
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Category Limits Styles */
+.limits-section {
+  margin-bottom: 24px;
+  padding: 20px;
+  background: var(--panel);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px var(--shadow);
+  animation: slideIn 0.8s ease-out 0.2s both;
+}
+
+.limits-section h2 {
+  margin: 0 0 16px;
+  color: var(--text);
+  font-size: 1.2rem;
+}
+
+.category-limits {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.limit-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: var(--accent-soft);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.limit-item.over-limit {
+  background: rgba(220, 53, 69, 0.1);
+  border-color: var(--danger);
+  animation: pulse 1s infinite;
+}
+
+.limit-name {
+  font-weight: 600;
+}
+
+.limit-amount {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.limit-item.over-limit .limit-amount {
+  color: var(--danger);
+}
+
+/* Responsive design for mobile - optimized for screenshots */
+@media (max-width: 768px) {
+  body {
+    padding: 5px;
+  }
+
+  .app-shell {
+    width: calc(100vw - 10px);
+  }
+
+  .main-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 15px;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .stats-panel {
+    justify-content: center;
+  }
+
+  .summary-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .filter-buttons {
+    justify-content: center;
+  }
+
+  .expense-card,
+  .summary-card {
+    padding: 15px;
+  }
+}
+
+/* Expense Trends Styles */
+.trends-section {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: var(--panel);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px var(--shadow);
+  animation: fadeIn 0.8s ease-out 0.4s both;
+}
+
+.trends-section h3 {
+  margin: 0 0 12px;
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+.expense-trends {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.trend-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-radius: 6px;
+}
+
+.trend-change {
+  font-weight: 600;
+}
+
+.trend-change.positive {
+  color: var(--success);
+}
+
+.trend-change.negative {
+  color: var(--danger);
+}
+
+/* Quick Actions Styles */
+.quick-actions {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: var(--panel);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px var(--shadow);
+  animation: slideIn 0.8s ease-out 0.6s both;
+}
+
+.quick-actions h3 {
+  margin: 0 0 12px;
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+.quick-actions .btn {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.quick-actions .btn:last-child {
+  margin-bottom: 0;
+}
+
+/* Notifications Styles */
+.notifications {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  max-width: 300px;
+}
+
+.notification {
+  background: var(--panel);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 20px var(--shadow);
+  border-left: 4px solid var(--accent);
+  animation: slideIn 0.5s ease-out;
+  opacity: 0;
+  transform: translateX(100%);
+  position: relative;
+}
+
+.notification.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.notification.success {
+  border-left-color: var(--success);
+}
+
+.notification.warning {
+  border-left-color: var(--warning);
+}
+
+.notification.error {
+  border-left-color: var(--danger);
+}
+
+.notification h4 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.notification p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.notification-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+/* Dark theme styles */
+body.dark-theme {
+  --bg: var(--dark-bg);
+  --panel: var(--dark-panel);
+  --text: var(--dark-text);
+  --muted: var(--dark-muted);
+  --border: #404040;
+  --shadow: rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+body.dark-theme .progress-bar {
+  background: #404040;
+}
+
+/* Enhanced button animations */
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--shadow);
+}
+
+.btn:active {
+  transform: translateY(0);
+  transition: transform 0.1s ease;
+}
+
+/* Expense item hover effects */
+.expense-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+/* Category item animations */
+.category-item {
+  animation: fadeIn 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+.category-item:nth-child(1) { animation-delay: 0.1s; }
+.category-item:nth-child(2) { animation-delay: 0.2s; }
+.category-item:nth-child(3) { animation-delay: 0.3s; }
+.category-item:nth-child(4) { animation-delay: 0.4s; }
+.category-item:nth-child(5) { animation-delay: 0.5s; }

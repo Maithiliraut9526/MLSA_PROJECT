@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic HTML document setup with UTF-8 encoding and responsive viewport -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker Plus</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Main container for the entire application -->
+  <div class="app-shell">
+    <!-- Header section with app title and summary statistics -->
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Expense Tracker Plus</p>
+        <h1>Track your expenses with ease</h1>
+      </div>
+      <!-- Display total expenses, transaction count, and budget status -->
+      <div class="stats-panel">
+        <div class="stat-block">
+          <span>Total Expenses</span>
+          <strong id="total-expenses">₹0.00</strong>
+        </div>
+        <div class="stat-block">
+          <span>Transactions</span>
+          <strong id="transaction-count">0</strong>
+        </div>
+        <div class="stat-block">
+          <span>Budget Remaining</span>
+          <strong id="budget-remaining">₹0.00</strong>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content grid with expense form/list and summary sidebar -->
+    <main class="main-grid">
+      <!-- Left section: Add expense form and recent expenses list -->
+      <section class="expense-card">
+        <div class="add-expense">
+          <h2>Add New Expense</h2>
+          <!-- Form to input expense details: amount, category, date -->
+          <form id="expense-form">
+            <div class="form-group">
+              <label for="amount">Amount (₹)</label>
+              <input type="number" id="amount" step="0.01" min="0" required />
+            </div>
+            <div class="form-group">
+              <label for="category">Category</label>
+              <select id="category" required>
+                <option value="">Select Category</option>
+                <option value="Food">Food</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input type="date" id="date" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Add Expense</button>
+          </form>
+        </div>
+
+        <!-- Budget Setting Section -->
+        <div class="budget-section">
+          <h2>Set Monthly Budget</h2>
+          <form id="budget-form">
+            <div class="form-group">
+              <label for="budget-amount">Monthly Budget (₹)</label>
+              <input type="number" id="budget-amount" step="0.01" min="0" placeholder="Enter your monthly budget" />
+            </div>
+            <button type="submit" class="btn btn-primary">Set Budget</button>
+          </form>
+          <div id="budget-progress" class="budget-progress">
+            <div class="progress-bar">
+              <div id="progress-fill" class="progress-fill"></div>
+            </div>
+            <span id="budget-status">No budget set</span>
+          </div>
+        </div>
+
+        <!-- Category Limits Section -->
+        <div class="limits-section">
+          <h2>Category Limits</h2>
+          <div id="category-limits" class="category-limits">
+            <!-- Dynamic category limits will be added here -->
+          </div>
+        </div>
+
+        <!-- List of recent expenses with delete functionality -->
+        <div class="expense-list">
+          <h2>Recent Expenses</h2>
+          <div id="expense-list" class="list-container">
+            <p class="empty-state">No expenses added yet.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right sidebar: Summary, filters, chart, and export -->
+      <aside class="summary-card">
+        <div class="summary-header">
+          <h2>Summary</h2>
+          <!-- Buttons to filter summary by daily, weekly, or monthly -->
+          <div class="filter-buttons">
+            <button id="daily-btn" class="btn btn-secondary">Daily</button>
+            <button id="weekly-btn" class="btn btn-secondary">Weekly</button>
+            <button id="monthly-btn" class="btn btn-secondary active">Monthly</button>
+          </div>
+        </div>
+        <!-- Category-wise expense summary -->
+        <div class="category-summary" id="category-summary">
+          <p class="empty-state">No data to display.</p>
+        </div>
+
+        <!-- Expense Trends Section -->
+        <div class="trends-section">
+          <h3>Expense Trends</h3>
+          <div id="expense-trends" class="expense-trends">
+            <div class="trend-item">
+              <span>This Week</span>
+              <span id="weekly-trend">₹0.00</span>
+            </div>
+            <div class="trend-item">
+              <span>Last Week</span>
+              <span id="last-week-trend">₹0.00</span>
+            </div>
+            <div class="trend-item">
+              <span>Change</span>
+              <span id="trend-change" class="trend-change">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text-based chart showing category expenses -->
+        <div class="chart-section">
+          <h3>Category Chart</h3>
+          <pre id="text-chart" class="text-chart">No data</pre>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+          <h3>Quick Actions</h3>
+          <button id="clear-all-btn" class="btn btn-secondary">Clear All Data</button>
+          <button id="theme-toggle" class="btn btn-secondary">Toggle Theme</button>
+        </div>
+
+        <!-- Button to export expenses to CSV file -->
+        <div class="export-section">
+          <button id="export-csv" class="btn btn-tertiary">Export to CSV</button>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Notifications Panel -->
+    <div id="notifications" class="notifications">
+      <!-- Notifications will appear here -->
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
